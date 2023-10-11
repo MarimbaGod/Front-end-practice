@@ -1,57 +1,64 @@
-// window.addEventListener('DOMContentLoaded', async () => {
-//     const url = 'http://localhost:8000/api/conferences/';
-//     try {
-//         const response = await fetch(url);
+function createCard(name, description, pictureUrl, start, end) {
+    const formattedStartDate = new Date(start).toLocaleDateString();
+    const formattedEndDate = new Date(end).toLocaleDateString();
 
-//         if (!response.ok) {
-//           // Figure out what to do when the response is bad
-//         } else {
-//         const data = await response.json();
+    return `
+    <div class="col mb-4">
+        <div class="card shadow">
+            <img src="${pictureUrl}" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">${name}</h5>
+                <p class="card-text">${description}</p>
+            </div>
+            <div class="card-footer">
+                ${formattedStartDate} - ${formattedEndDate}
+            </div>
+        </div>
 
-//         const conference = data.conferences[0];
-//         const nameTag = document.querySelector('.card-title');
-//         nameTag.innerHTML = conference.name;
-
-//         const detailUrl = `http://localhost:8000${conference.href}`;
-//         const detailResponse = await fetch(detailUrl);
-//         if (detailResponse.ok) {
-//             const details = await detailResponse.json();
-//             console.log(details);
-//         }
-    //     }
-    // } catch (e) {
-    //     // Figure out what to do if an error is raised
-    // }
+    </div>
+    `;
+}
 
     window.addEventListener('DOMContentLoaded', async () => {
         const url = 'http://localhost:8000/api/conferences/';
+
+        // const column = document.querySelector('.col');
+        // column.innerHTML += html;
+
         try {
             const response = await fetch(url);
+
             if (!response.ok) {
-                //Figure out what to do When response bad
+                console.log("Response not ok")
             } else {
                 const data = await response.json();
 
-                const conference = data.conferences[0];
-                const nameTag = document.querySelector('.card-title');
-                nameTag.innerHTML = conference.name;
-
-                const detailUrl = `http://localhost:8000${conference.href}`;
-                const detailResponse = await fetch(detailUrl);
-                if (detailResponse.ok) {
-                    const details = await detailResponse.json();
-
-                    const descriptionTag = document.querySelector('.card-text')
-                    descriptionTag.innerHTML = details.conference.description;
-                    console.log(details);
-
-                    const imageTag = document.querySelector('.card-img-top')
-                    imageTag.src = details.conference.location.picture_url;
+                for (let conference of data.conferences) {
+                    const detailUrl = `http://localhost:8000${conference.href}`;
+                    const detailResponse = await fetch(detailUrl);
+                    if (detailResponse.ok) {
+                        const details = await detailResponse.json();
+                        const title = details.conference.title;
+                        const description = details.conference.description;
+                        const pictureUrl = details.conference.location.picture_url;
+                        const start = details.conference.start;
+                        const end = details.conference.end;
+                        const html = createCard(title, description, pictureUrl, start, end);
+                        // const column = document.querySelector('.col');
+                        // column.innerHTML += html;
+                        const row = document.querySelector('.row');
+                        row.innerHTML += html;
+                    }
                 }
+                // const conference = data.conferences[0];
+                // const nameTag = document.querySelector('.card-title');
+                // nameTag.innerHTML = conference.name;
+
+                // const detailUrl = `http://localhost:8000${conference.href}`;
 
             }
         } catch (e) {
-            // figure out response if error
+            console.log("There was an Error")
         }
 
     // const response = await fetch(url);
