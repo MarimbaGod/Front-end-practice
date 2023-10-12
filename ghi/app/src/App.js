@@ -2,7 +2,7 @@
 // import './App.css';
 import Nav from './Nav';
 import AttendeesList from './AttendeesList';
-import LocationForm from '.LocationForm';
+import LocationForm from './LocationForm';
 
 
 function App(props) {
