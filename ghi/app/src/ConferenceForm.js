@@ -15,6 +15,7 @@ function ConferenceForm() {
     location: '',
   })
 
+
   const fetchData = async () => {
     const url = 'http://localhost:8000/api/locations/';
     const response = await fetch(url);
@@ -31,14 +32,14 @@ function ConferenceForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // const data = {};
-    // data.name = name;
-    // data.starts = starts;
-    // data.ends = ends;
-    // data.description = description;
-    // data.max_presentations = max_presentations;
-    // data.max_attendees = max_attendees;
-    // data.location = location;
+    // const [end, setEnd] = useState('');
+    // const [start, setStart] = useState('');
+    // const [name, setName] = useState('');
+    // const [city, setCity] = useState('');
+    // const [max_presentations, setMaxPres] = useState('');
+    // const [max_attendees, setMaxAtt] = useState('');
+    // const [location, setLocation] = useState('')
+    // const [states, setDescription] = useState('');
 
     const conferenceUrl = 'http://localhost:8000/api/conferences/';
 
@@ -68,6 +69,14 @@ function ConferenceForm() {
         max_attendees: '',
         location: '',
       });
+      // setName('');
+      // setLocation('');
+      // setStart('');
+      // setEnd('');
+      // setDescription('');
+      // setMaxAtt('');
+      // setMaxPres('');
+      // setCity('');
     }
   }
 
