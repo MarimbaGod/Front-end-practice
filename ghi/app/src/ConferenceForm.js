@@ -86,7 +86,7 @@ function ConferenceForm() {
           <form onSubmit={handleSubmit} id="create-conference-form">
 
             <div className="form-floating mb-3">
-              <!-- Now, each field in our form references the same function -->
+              {/* <!-- Now, each field in our form references the same function --> */}
               <input onChange={handleFormChange} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
               <label htmlFor="name">Name</label>
             </div>
@@ -103,7 +103,7 @@ function ConferenceForm() {
 
             <div className="mb-3">
               <label htmlFor="description">Description</label>
-              <textarea onChange={handleFormChange} className="form-control" id="description" rows="3" name="description" className="form-control"></textarea>
+              <textarea onChange={handleFormChange} className="form-control" id="description" rows="3" name="description"></textarea>
             </div>
 
             <div className="form-floating mb-3">
