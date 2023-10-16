@@ -31,7 +31,16 @@ function ConferenceForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const url = 'http://localhost:8000/api/conferences/';
+    // const data = {};
+    // data.name = name;
+    // data.starts = starts;
+    // data.ends = ends;
+    // data.description = description;
+    // data.max_presentations = max_presentations;
+    // data.max_attendees = max_attendees;
+    // data.location = location;
+
+    const conferenceUrl = 'http://localhost:8000/api/conferences/';
 
     const fetchConfig = {
       method: "post",
@@ -43,9 +52,11 @@ function ConferenceForm() {
       },
     };
 
-    const response = await fetch(url, fetchConfig);
+    const response = await fetch(conferenceUrl, fetchConfig);
 
     if (response.ok) {
+      const createNewConference = await response.json();
+      console.log(createNewConference);
       //The single formData object
       //also allows for easier clearing of data
       setFormData({
